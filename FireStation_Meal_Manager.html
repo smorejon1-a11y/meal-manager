@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Station 2 Kitty - Meal Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #d32f2f;
+            --primary-dark: #b71c1c;
+            --gold: #ffd700;
+            --dark: #1a1a1a;
+            --light: #f5f5f5;
+            --success: #2e7d32;
+            --warning: #f57c00;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .station-name {
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .user-info {
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        .user-role {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            color: var(--gold);
+        }
+
+        button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        button.secondary {
+            background-color: var(--gold);
+            color: var(--dark);
+        }
+
+        button.secondary:hover {
+            background-color: #ffb300;
+        }
+
+        button.small {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        button.success {
+            background-color: var(--success);
+        }
+
+        button.success:hover {
+            background-color: #1b5e20;
+        }
+
+        /* NAVIGATION */
+        nav {
+            background-color: var(--dark);
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        nav button {
+            background: none;
+            color: white;
+            border: none;
+            border-radius: 0;
+            padding: 1rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav button:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+
+        nav button.active {
+            background-color: var(--primary);
+            border-bottom-color: var(--gold);
+        }
+
+        /* LOGIN PAGE */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+
+        .login-box {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-box h1 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .login-box p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        input[type="email"],
+        input[type="password"],
+        input[type="text"],
+        input[type="number"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 5px rgba(211, 47, 47, 0.3);
+        }
+
+        /* MAIN CONTENT */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* DASHBOARD GRID */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 5px solid var(--primary);
+        }
+
+        .card h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .card p {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .card-success {
+            border-left-color: var(--success);
+        }
+
+        .card-success h2 {
+            color: var(--success);
+        }
+
+        .card-success .card-value {
+            color: var(--success);
+        }
+
+        .card-warning {
+            border-left-color: var(--warning);
+        }
+
+        .card-warning h2 {
+            color: var(--warning);
+        }
+
+        .card-warning .card-value {
+            color: var(--warning);
+        }
+
+        /* DINNERS */
+        .dinners-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .dinner-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--primary);
+        }
+
+        .dinner-date {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .dinner-cook {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .dinner-cost {
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .dinner-cost-line {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .dinner-cost-line:last-child {
+            margin-bottom: 0;
+            font-weight: bold;
+            color: var(--primary);
+            border-top: 1px solid #ddd;
+            padding-top: 0.5rem;
+        }
+
+        .participants {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        .participant-list {
+            list-style: none;
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .participant-list li {
+            padding: 0.3rem 0;
+            color: #666;
+        }
+
+        /* TABLES */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        thead {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background-color: var(--light);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-paid {
+            background-color: #c8e6c9;
+            color: var(--success);
+        }
+
+        .status-unpaid {
+            background-color: #ffccbc;
+            color: var(--warning);
+        }
+
+        .status-pending {
+            background-color: #b3e5fc;
+            color: #01579b;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .close-btn:hover {
+            color: var(--primary);
+        }
+
+        /* VENMO QR */
+        .venmo-section {
+            text-align: center;
+            padding: 2rem;
+            background: var(--light);
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .venmo-qr {
+            font-size: 3rem;
+            margin: 1rem 0;
+        }
+
+        .venmo-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            nav button {
+                width: 100%;
+                text-align: left;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .dashboard-grid,
+            .dinners-container {
+                grid-template-columns: 1fr;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 0.7rem;
+            }
+        }
+
+        .message {
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .message.success {
+            background-color: #c8e6c9;
+            color: var(--success);
+            border-left: 4px solid var(--success);
+        }
+
+        .message.error {
+            background-color: #ffcdd2;
+            color: #c62828;
+            border-left: 4px solid #c62828;
+        }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="login-container">
+    <div class="login-box">
+        <div class="logo" style="text-align: center; font-size: 3rem; margin-bottom: 1rem;">🚒</div>
+        <h1>Station 2 Kitty</h1>
+        <p>Meal Management System</p>
+        
+        <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="loginEmail" placeholder="your@email.com">
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="Password">
+        </div>
+
+        <button onclick="handleLogin()" style="width: 100%; margin-bottom: 1rem;">Login</button>
+        
+        <p style="text-align: center; font-size: 0.9rem; color: #999;">
+            New user? <a href="#" onclick="toggleSignup()" style="color: var(--primary); text-decoration: none;">Create Account</a>
+        </p>
+
+        <div id="signupForm" class="hidden" style="margin-top: 1.5rem; border-top: 1px solid #eee; padding-top: 1.5rem;">
+            <h3 style="margin-bottom: 1rem;">Create New Account</h3>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="signupEmail" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="signupPassword" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" id="signupName" placeholder="Your Name">
+            </div>
+            <button onclick="handleSignup()" style="width: 100%;">Create Account</button>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="mainApp" class="hidden">
+    <!-- HEADER -->
+    <header>
+        <div class="header-left">
+            <div class="logo">🚒</div>
+            <div>
+                <div class="station-name">Station 2 Kitty</div>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <div id="userName">Crew Member</div>
+                <div class="user-role" id="userRole">Crew</div>
+            </div>
+            <button onclick="handleLogout()" class="secondary">Logout</button>
+        </div>
+    </header>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <button class="nav-btn active" onclick="showPage('dashboard', this)">Dashboard</button>
+        <button class="nav-btn" onclick="showPage('dinners', this)">Dinners</button>
+        <button class="nav-btn" onclick="showPage('kitchen', this)">Kitchen Items</button>
+        <button class="nav-btn" onclick="showPage('payments', this)">Payments</button>
+        <button class="nav-btn" onclick="showPage('inventory', this)">Inventory</button>
+        <button class="nav-btn admin-only hidden" onclick="showPage('admin', this)">Admin Panel</button>
+    </nav>
+
+    <!-- CONTENT -->
+    <div class="container">
+        <div id="message" class="message"></div>
+
+        <!-- DASHBOARD -->
+        <div id="dashboardPage" class="page">
+            <h1 style="margin-bottom: 2rem; color: var(--primary);">Dashboard</h1>
+            
+            <div class="dashboard-grid">
+                <div class="card card-warning">
+                    <h2>You Owe</h2>
+                    <div class="card-value" id="amountOwed">$0.00</div>
+                    <p>Total from dinners</p>
+                </div>
+
+                <div class="card card-success">
+                    <h2>You've Paid</h2>
+                    <div class="card-value" id="amountPaid">$0.00</div>
+                    <p>Total payments</p>
+                </div>
+
+                <div class="card">
+                    <h2>Kitchen Balance</h2>
+                    <div class="card-value" id="kitchenBalance">$1,000.00</div>
+                    <p>Available for meals</p>
+                </div>
+            </div>
+
+            <h2 style="margin-bottom: 1rem; color: var(--primary);">Upcoming Dinners</h2>
+            <div id="upcomingDinners" class="dinners-container">
+                <p style="grid-column: 1/-1; text-align: center; color: #999;">No upcoming dinners</p>
+            </div>
+        </div>
+
+        <!-- DINNERS -->
+        <div id="dinnersPage" class="page hidden">
+            <h1 style="margin-bottom: 1rem; color: var(--primary);">Dinners</h1>
+            
+            <button class="secondary admin-only hidden" onclick="openCreateDinnerModal()" style="margin-bottom: 2rem;">+ Create Dinner</button>
+
+            <div id="dinnersList" class="dinners-container">
+                <p style="grid-column: 1/-1; text-align: center; color: #999;">No dinners available</p>
+            </div>
+        </div>
+
+        <!-- KITCHEN ITEMS -->
+        <div id="kitchenPage" class="page hidden">
+            <h1 style="margin-bottom: 1rem; color: var(--primary);">Kitchen Items & Receipts</h1>
+            
+            <button onclick="openKitchenReceiptModal()" style="margin-bottom: 2rem;">+ Submit Receipt</button>
+
+            <h2 style="margin-bottom: 1rem;">Recent Receipts</h2>
+            <table id="kitchenReceiptsTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Vendor</th>
+                        <th>Category</th>
+                        <th>Amount</th>
+                        <th>Description</th>
+                        <th>Submitted By</th>
+                    </tr>
+                </thead>
+                <tbody id="kitchenReceiptsBody">
+                    <tr><td colspan="6" style="text-align: center; color: #999;">No receipts yet</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- PAYMENTS -->
+        <div id="paymentsPage" class="page hidden">
+            <h1 style="margin-bottom: 1rem; color: var(--primary);">Payments</h1>
+
+            <div class="venmo-section">
+                <h2>Send Payment via Venmo</h2>
+                <div class="venmo-qr">📱</div>
+                <p>Scan QR or send payment to:</p>
+                <p style="margin-top: 0.5rem; font-weight: bold;">@Station2Kitty</p>
+                <button onclick="openPaymentModal()" style="margin-top: 1rem;">Mark Payment Sent</button>
+            </div>
+
+            <h2 style="margin-bottom: 1rem;">Payment Status</h2>
+            <table id="paymentsTable">
+                <thead>
+                    <tr>
+                        <th>Person</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="paymentsBody">
+                    <tr><td colspan="5" style="text-align: center; color: #999;">No payments yet</td></tr>
+                </tbody>
+            </table>
+
+            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">Who Owes What</h2>
+            <table id="debtTable">
+                <thead>
+                    <tr>
+                        <th>Person</th>
+                        <th>Total Owed</th>
+                        <th>Total Paid</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody id="debtBody">
+                    <tr><td colspan="4" style="text-align: center; color: #999;">No data yet</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- INVENTORY -->
+        <div id="inventoryPage" class="page hidden">
+            <h1 style="margin-bottom: 1rem; color: var(--primary);">Inventory</h1>
+            
+            <table id="inventoryTable">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Last Updated</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryBody">
+                    <tr><td colspan="5" style="text-align: center; color: #999;">No inventory items</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ADMIN PANEL -->
+        <div id="adminPage" class="page hidden admin-only">
+            <h1 style="margin-bottom: 2rem; color: var(--primary);">Admin Panel</h1>
+
+            <div class="dashboard-grid">
+                <div class="card">
+                    <h2>Total Collected</h2>
+                    <div class="card-value" id="adminTotalCollected">$0.00</div>
+                    <button onclick="openEditBalanceModal()" class="small" style="margin-top: 1rem;">Edit</button>
+                </div>
+
+                <div class="card">
+                    <h2>Total Spent</h2>
+                    <div class="card-value" id="adminTotalSpent">$0.00</div>
+                </div>
+
+                <div class="card">
+                    <h2>Remaining</h2>
+                    <div class="card-value" id="adminRemaining">$0.00</div>
+                </div>
+            </div>
+
+            <h2 style="margin-bottom: 1rem; margin-top: 2rem;">Pending Approvals</h2>
+            
+            <h3 style="margin-top: 1.5rem; margin-bottom: 1rem;">Kitchen Receipts</h3>
+            <table id="adminReceiptsTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Vendor</th>
+                        <th>Amount</th>
+                        <th>Submitted By</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="adminReceiptsBody">
+                    <tr><td colspan="5" style="text-align: center; color: #999;">No receipts</td></tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 1.5rem; margin-bottom: 1rem;">Pending Payment Confirmations</h3>
+            <table id="adminPaymentsTable">
+                <thead>
+                    <tr>
+                        <th>Person</th>
+                        <th>Amount</th>
+                        <th>Date Submitted</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="adminPaymentsBody">
+                    <tr><td colspan="4" style="text-align: center; color: #999;">No pending payments</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- MODALS -->
+
+<!-- CREATE DINNER MODAL -->
+<div id="createDinnerModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Create Dinner</h2>
+            <button class="close-btn" onclick="closeModal('createDinnerModal')">×</button>
+        </div>
+        <div class="form-group">
+            <label>Date & Time</label>
+            <input type="datetime-local" id="dinnerDateTime">
+        </div>
+        <div class="form-group">
+            <label>Who's Cooking?</label>
+            <input type="text" id="dinnerCook" placeholder="Name">
+        </div>
+        <div class="form-group">
+            <label>Total Cost ($)</label>
+            <input type="number" id="dinnerCost" step="0.01" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" id="dinnerDescription" placeholder="e.g., Spaghetti with sauce">
+        </div>
+        <button onclick="createDinner()" style="width: 100%;">Create Dinner</button>
+    </div>
+</div>
+
+<!-- KITCHEN RECEIPT MODAL -->
+<div id="kitchenReceiptModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Submit Kitchen Receipt</h2>
+            <button class="close-btn" onclick="closeModal('kitchenReceiptModal')">×</button>
+        </div>
+        <div class="form-group">
+            <label>Date</label>
+            <input type="date" id="receiptDate">
+        </div>
+        <div class="form-group">
+            <label>Vendor</label>
+            <input type="text" id="receiptVendor" placeholder="e.g., Publix">
+        </div>
+        <div class="form-group">
+            <label>Amount ($)</label>
+            <input type="number" id="receiptAmount" step="0.01" placeholder="0.00">
+        </div>
+        <div class="form-group">
+            <label>Category</label>
+            <select id="receiptCategory">
+                <option value="proteins">Proteins</option>
+                <option value="vegetables">Vegetables</option>
+                <option value="grains">Grains/Pasta</option>
+                <option value="spices">Spices</option>
+                <option value="beverages">Beverages</option>
+                <option value="supplies">Supplies</option>
+                <option value="other">Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" id="receiptDescription" placeholder="What did you buy?">
+        </div>
+        <button onclick="submitKitchenReceipt()" style="width: 100%;">Submit Receipt</button>
+    </div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div id="paymentModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Mark Payment Sent</h2>
+            <button class="close-btn" onclick="closeModal('paymentModal')">×</button>
+        </div>
+        <p style="margin-bottom: 1rem; color: #666;">I've sent payment via Venmo to @Station2Kitty</p>
+        <div class="form-group">
+            <label>Amount Sent ($)</label>
+            <input type="number" id="paymentAmount" step="0.01" placeholder="0.00">
+        </div>
+        <button onclick="submitPayment()" style="width: 100%;">Confirm Payment Sent</button>
+    </div>
+</div>
+
+<!-- EDIT BALANCE MODAL (ADMIN ONLY) -->
+<div id="editBalanceModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Edit Kitchen Balance</h2>
+            <button class="close-btn" onclick="closeModal('editBalanceModal')">×</button>
+        </div>
+        <div class="form-group">
+            <label>Total Money Collected ($)</label>
+            <input type="number" id="newBalance" step="0.01" placeholder="0.00">
+        </div>
+        <button onclick="updateBalance()" style="width: 100%;">Update Balance</button>
+    </div>
+</div>
+
+<!-- Firebase -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, query, where, onSnapshot, updateDoc, doc, getDocs, serverTimestamp, deleteDoc } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDPi3MinlFGQJuYKzNKDDsgnzfpoqEXOzY",
+        authDomain: "station-2-kitty.firebaseapp.com",
+        projectId: "station-2-kitty",
+        storageBucket: "station-2-kitty.firebasestorage.app",
+        messagingSenderId: "554327060532",
+        appId: "1:554327060532:web:80711fe3aefa71dce4da61",
+        measurementId: "G-RKM5B7Z15E"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    // GLOBAL STATE
+    let currentUser = null;
+    let userRole = 'crew';
+    let userName = '';
+    let kitchenBalance = 0;
+    let dinners = [];
+    let payments = [];
+    let receipts = [];
+
+    // AUTH FUNCTIONS
+    window.handleLogin = async function() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        if (!email || !password) {
+            showMessage('Please fill in all fields', 'error');
+            return;
+        }
+
+        try {
+            const result = await signInWithEmailAndPassword(auth, email, password);
+            currentUser = result.user;
+            console.log('Logged in:', currentUser.email);
+        } catch (error) {
+            showMessage('Login failed: ' + error.message, 'error');
+        }
+    };
+
+    window.toggleSignup = function() {
+        document.getElementById('signupForm').classList.toggle('hidden');
+    };
+
+    window.handleSignup = async function() {
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        const name = document.getElementById('signupName').value;
+
+        if (!email || !password || !name) {
+            showMessage('Please fill in all fields', 'error');
+            return;
+        }
+
+        try {
+            const result = await createUserWithEmailAndPassword(auth, email, password);
+            currentUser = result.user;
+            
+            // Save user info to Firestore
+            await addDoc(collection(db, 'users'), {
+                uid: result.user.uid,
+                email: email,
+                name: name,
+                role: 'crew',
+                createdAt: serverTimestamp()
+            });
+
+            showMessage('Account created! Logging in...', 'success');
+            setTimeout(() => {
+                document.getElementById('signupForm').classList.add('hidden');
+            }, 1000);
+        } catch (error) {
+            showMessage('Signup failed: ' + error.message, 'error');
+        }
+    };
+
+    window.handleLogout = async function() {
+        await signOut(auth);
+        currentUser = null;
+        document.getElementById('loginPage').style.display = 'flex';
+        document.getElementById('mainApp').classList.add('hidden');
+        document.getElementById('loginEmail').value = '';
+        document.getElementById('loginPassword').value = '';
+    };
+
+    // CHECK AUTH STATE
+    onAuthStateChanged(auth, async (user) => {
+        if (user) {
+            currentUser = user;
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('mainApp').classList.remove('hidden');
+
+            // Get user data
+            const usersRef = collection(db, 'users');
+            const q = query(usersRef, where('uid', '==', user.uid));
+            const querySnapshot = await getDocs(q);
+            
+            if (!querySnapshot.empty) {
+                const userData = querySnapshot.docs[0].data();
+                userName = userData.name;
+                userRole = userData.role;
+                document.getElementById('userName').textContent = userName;
+                document.getElementById('userRole').textContent = userRole === 'admin' ? 'Admin' : 'Crew';
+
+                // Show/hide admin panel
+                const adminElements = document.querySelectorAll('.admin-only');
+                if (userRole === 'admin') {
+                    adminElements.forEach(el => el.classList.remove('hidden'));
+                } else {
+                    adminElements.forEach(el => el.classList.add('hidden'));
+                }
+            }
+
+            // Load data
+            loadDinners();
+            loadReceipts();
+            loadPayments();
+            loadKitchenBalance();
+            loadInventory();
+        } else {
+            document.getElementById('loginPage').style.display = 'flex';
+            document.getElementById('mainApp').classList.add('hidden');
+        }
+    });
+
+    // PAGE NAVIGATION
+    window.showPage = function(pageName, btn) {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+        
+        // Show selected page
+        document.getElementById(pageName + 'Page').classList.remove('hidden');
+
+        // Update nav
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+        if (btn) btn.classList.add('active');
+    };
+
+    // MODAL FUNCTIONS
+    window.openCreateDinnerModal = function() {
+        document.getElementById('dinnerDateTime').valueAsDate = new Date();
+        document.getElementById('createDinnerModal').classList.add('active');
+    };
+
+    window.openKitchenReceiptModal = function() {
+        document.getElementById('receiptDate').valueAsDate = new Date();
+        document.getElementById('kitchenReceiptModal').classList.add('active');
+    };
+
+    window.openPaymentModal = function() {
+        document.getElementById('paymentModal').classList.add('active');
+    };
+
+    window.openEditBalanceModal = function() {
+        document.getElementById('newBalance').value = kitchenBalance;
+        document.getElementById('editBalanceModal').classList.add('active');
+    };
+
+    window.closeModal = function(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    };
+
+    // DINNER FUNCTIONS
+    window.createDinner = async function() {
+        if (!document.getElementById('dinnerDateTime').value || !document.getElementById('dinnerCook').value || !document.getElementById('dinnerCost').value) {
+            showMessage('Please fill in all fields', 'error');
+            return;
+        }
+
+        try {
+            await addDoc(collection(db, 'dinners'), {
+                dateTime: new Date(document.getElementById('dinnerDateTime').value),
+                cook: document.getElementById('dinnerCook').value,
+                totalCost: parseFloat(document.getElementById('dinnerCost').value),
+                description: document.getElementById('dinnerDescription').value,
+                participants: [],
+                createdBy: currentUser.email,
+                createdAt: serverTimestamp()
+            });
+
+            showMessage('Dinner created!', 'success');
+            closeModal('createDinnerModal');
+            loadDinners();
+        } catch (error) {
+            showMessage('Error creating dinner: ' + error.message, 'error');
+        }
+    };
+
+    window.optIntoDinner = async function(dinnerId) {
+        try {
+            const dinner = dinners.find(d => d.id === dinnerId);
+            const newParticipants = [...dinner.participants, currentUser.email];
+            
+            await updateDoc(doc(db, 'dinners', dinnerId), {
+                participants: newParticipants
+            });
+
+            loadDinners();
+        } catch (error) {
+            showMessage('Error opting in: ' + error.message, 'error');
+        }
+    };
+
+    window.optOutDinner = async function(dinnerId) {
+        try {
+            const dinner = dinners.find(d => d.id === dinnerId);
+            const newParticipants = dinner.participants.filter(p => p !== currentUser.email);
+            
+            await updateDoc(doc(db, 'dinners', dinnerId), {
+                participants: newParticipants
+            });
+
+            loadDinners();
+        } catch (error) {
+            showMessage('Error opting out: ' + error.message, 'error');
+        }
+    };
+
+    // KITCHEN RECEIPT FUNCTIONS
+    window.submitKitchenReceipt = async function() {
+        if (!document.getElementById('receiptDate').value || !document.getElementById('receiptAmount').value) {
+            showMessage('Please fill in all fields', 'error');
+            return;
+        }
+
+        try {
+            await addDoc(collection(db, 'receipts'), {
+                date: new Date(document.getElementById('receiptDate').value),
+                vendor: document.getElementById('receiptVendor').value,
+                amount: parseFloat(document.getElementById('receiptAmount').value),
+                category: document.getElementById('receiptCategory').value,
+                description: document.getElementById('receiptDescription').value,
+                submittedBy: userName,
+                submittedByEmail: currentUser.email,
+                createdAt: serverTimestamp()
+            });
+
+            showMessage('Receipt submitted!', 'success');
+            closeModal('kitchenReceiptModal');
+            loadReceipts();
+            loadKitchenBalance();
+        } catch (error) {
+            showMessage('Error submitting receipt: ' + error.message, 'error');
+        }
+    };
+
+    // PAYMENT FUNCTIONS
+    window.submitPayment = async function() {
+        const amount = parseFloat(document.getElementById('paymentAmount').value);
+        
+        if (!amount) {
+            showMessage('Please enter an amount', 'error');
+            return;
+        }
+
+        try {
+            await addDoc(collection(db, 'payments'), {
+                email: currentUser.email,
+                name: userName,
+                amount: amount,
+                submittedAt: serverTimestamp(),
+                status: 'pending',
+                confirmedAt: null,
+                confirmedBy: null
+            });
+
+            showMessage('Payment submitted for confirmation!', 'success');
+            closeModal('paymentModal');
+            loadPayments();
+        } catch (error) {
+            showMessage('Error submitting payment: ' + error.message, 'error');
+        }
+    };
+
+    window.confirmPayment = async function(paymentId) {
+        if (userRole !== 'admin') {
+            showMessage('Only admins can confirm payments', 'error');
+            return;
+        }
+
+        try {
+            await updateDoc(doc(db, 'payments', paymentId), {
+                status: 'confirmed',
+                confirmedAt: serverTimestamp(),
+                confirmedBy: userName
+            });
+
+            loadPayments();
+            showMessage('Payment confirmed!', 'success');
+        } catch (error) {
+            showMessage('Error confirming payment: ' + error.message, 'error');
+        }
+    };
+
+    // BALANCE FUNCTIONS
+    window.updateBalance = async function() {
+        const newBalance = parseFloat(document.getElementById('newBalance').value);
+        
+        if (isNaN(newBalance)) {
+            showMessage('Please enter a valid amount', 'error');
+            return;
+        }
+
+        try {
+            // Save to settings
+            const settingsRef = collection(db, 'settings');
+            const q = query(settingsRef, where('type', '==', 'kitchen'));
+            const snapshot = await getDocs(q);
+
+            if (!snapshot.empty) {
+                await updateDoc(doc(db, 'settings', snapshot.docs[0].id), {
+                    startingBalance: newBalance,
+                    updatedAt: serverTimestamp()
+                });
+            } else {
+                await addDoc(collection(db, 'settings'), {
+                    type: 'kitchen',
+                    startingBalance: newBalance,
+                    createdAt: serverTimestamp()
+                });
+            }
+
+            showMessage('Balance updated!', 'success');
+            closeModal('editBalanceModal');
+            loadKitchenBalance();
+        } catch (error) {
+            showMessage('Error updating balance: ' + error.message, 'error');
+        }
+    };
+
+    // DATA LOADING FUNCTIONS
+    async function loadDinners() {
+        const q = query(collection(db, 'dinners'));
+        onSnapshot(q, (snapshot) => {
+            dinners = [];
+            snapshot.forEach((doc) => {
+                dinners.push({ id: doc.id, ...doc.data() });
+            });
+            renderDinners();
+            updateDashboard();
+        });
+    }
+
+    async function loadReceipts() {
+        const q = query(collection(db, 'receipts'));
+        onSnapshot(q, (snapshot) => {
+            receipts = [];
+            snapshot.forEach((doc) => {
+                receipts.push({ id: doc.id, ...doc.data() });
+            });
+            renderReceipts();
+        });
+    }
+
+    async function loadPayments() {
+        const q = query(collection(db, 'payments'));
+        onSnapshot(q, (snapshot) => {
+            payments = [];
+            snapshot.forEach((doc) => {
+                payments.push({ id: doc.id, ...doc.data() });
+            });
+            renderPayments();
+            updateDashboard();
+        });
+    }
+
+    async function loadKitchenBalance() {
+        const q = query(collection(db, 'settings'), where('type', '==', 'kitchen'));
+        onSnapshot(q, (snapshot) => {
+            if (!snapshot.empty) {
+                const data = snapshot.docs[0].data();
+                kitchenBalance = data.startingBalance || 0;
+            } else {
+                kitchenBalance = 1000; // Default
+            }
+
+            // Calculate remaining
+            const totalSpent = receipts.reduce((sum, r) => sum + r.amount, 0);
+            const remaining = kitchenBalance - totalSpent;
+
+            document.getElementById('kitchenBalance').textContent = '$' + remaining.toFixed(2);
+            document.getElementById('adminTotalCollected').textContent = '$' + kitchenBalance.toFixed(2);
+            document.getElementById('adminTotalSpent').textContent = '$' + totalSpent.toFixed(2);
+            document.getElementById('adminRemaining').textContent = '$' + remaining.toFixed(2);
+        });
+    }
+
+    async function loadInventory() {
+        const q = query(collection(db, 'inventory'));
+        onSnapshot(q, (snapshot) => {
+            const inventory = [];
+            snapshot.forEach((doc) => {
+                inventory.push({ id: doc.id, ...doc.data() });
+            });
+            renderInventory(inventory);
+        });
+    }
+
+    // RENDER FUNCTIONS
+    function renderDinners() {
+        const upcomingContainer = document.getElementById('upcomingDinners');
+        const dinnerListContainer = document.getElementById('dinnersList');
+        const upcoming = dinners.filter(d => new Date(d.dateTime.toDate()) > new Date()).sort((a, b) => a.dateTime - b.dateTime);
+
+        if (upcoming.length === 0) {
+            upcomingContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">No upcoming dinners</p>';
+            dinnerListContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">No dinners available</p>';
+            return;
+        }
+
+        upcomingContainer.innerHTML = upcoming.map(dinner => createDinnerCard(dinner)).join('');
+        dinnerListContainer.innerHTML = dinners.map(dinner => createDinnerCard(dinner)).join('');
+    }
+
+    function createDinnerCard(dinner) {
+        const date = new Date(dinner.dateTime.toDate());
+        const costPerPerson = dinner.participants.length > 0 ? (dinner.totalCost / dinner.participants.length).toFixed(2) : dinner.totalCost;
+        const isParticipant = dinner.participants.includes(currentUser.email);
+
+        return `
+            <div class="dinner-card">
+                <div class="dinner-date">${date.toLocaleDateString()} at ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                <div class="dinner-cook">👨‍🍳 ${dinner.cook}</div>
+                <div class="dinner-cost">
+                    <div class="dinner-cost-line">
+                        <span>Total Cost:</span>
+                        <span>$${dinner.totalCost.toFixed(2)}</span>
+                    </div>
+                    <div class="dinner-cost-line">
+                        <span>Participants:</span>
+                        <span>${dinner.participants.length} people</span>
+                    </div>
+                    <div class="dinner-cost-line">
+                        <span>Per Person:</span>
+                        <span>$${costPerPerson}</span>
+                    </div>
+                </div>
+                <div class="participants">
+                    ${dinner.description ? `<p><strong>Menu:</strong> ${dinner.description}</p>` : ''}
+                </div>
+                ${isParticipant 
+                    ? `<button onclick="optOutDinner('${dinner.id}')" class="small">Cancel RSVP</button>` 
+                    : `<button onclick="optIntoDinner('${dinner.id}')" class="small success">RSVP</button>`
+                }
+            </div>
+        `;
+    }
+
+    function renderReceipts() {
+        const tbody = document.getElementById('kitchenReceiptsBody');
+        const adminBody = document.getElementById('adminReceiptsBody');
+
+        if (receipts.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">No receipts yet</td></tr>';
+            adminBody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #999;">No receipts</td></tr>';
+            return;
+        }
+
+        const receiptRows = receipts.map(r => `
+            <tr>
+                <td>${new Date(r.date.toDate()).toLocaleDateString()}</td>
+                <td>${r.vendor || '-'}</td>
+                <td>${r.category}</td>
+                <td>$${r.amount.toFixed(2)}</td>
+                <td>${r.description}</td>
+                <td>${r.submittedBy}</td>
+            </tr>
+        `).join('');
+
+        tbody.innerHTML = receiptRows;
+        adminBody.innerHTML = receiptRows.map(row => row.replace('</tr>', '<td><button class="small" onclick="approveReceipt()">Approve</button></td></tr>')).join('');
+    }
+
+    function renderPayments() {
+        const tbody = document.getElementById('paymentsBody');
+        const adminBody = document.getElementById('adminPaymentsBody');
+        const debtBody = document.getElementById('debtBody');
+
+        if (payments.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #999;">No payments yet</td></tr>';
+            adminBody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">No pending payments</td></tr>';
+            debtBody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">No data yet</td></tr>';
+            return;
+        }
+
+        const paymentRows = payments.map(p => `
+            <tr>
+                <td>${p.name}</td>
+                <td>$${p.amount.toFixed(2)}</td>
+                <td>${new Date(p.submittedAt.toDate()).toLocaleDateString()}</td>
+                <td><span class="status-badge status-${p.status === 'confirmed' ? 'paid' : 'pending'}">${p.status.toUpperCase()}</span></td>
+                ${userRole === 'admin' && p.status === 'pending' ? `<td><button class="small success" onclick="confirmPayment('${p.id}')">Confirm</button></td>` : '<td></td>'}
+            </tr>
+        `).join('');
+
+        tbody.innerHTML = paymentRows;
+
+        // Admin pending only
+        const pending = payments.filter(p => p.status === 'pending').map(p => `
+            <tr>
+                <td>${p.name}</td>
+                <td>$${p.amount.toFixed(2)}</td>
+                <td>${new Date(p.submittedAt.toDate()).toLocaleDateString()}</td>
+                <td><button class="small success" onclick="confirmPayment('${p.id}')">Confirm</button></td>
+            </tr>
+        `).join('');
+
+        adminBody.innerHTML = pending || '<tr><td colspan="4" style="text-align: center; color: #999;">No pending payments</td></tr>';
+
+        // Debt summary
+        const debtSummary = {};
+        dinners.forEach(d => {
+            if (d.participants.length > 0) {
+                const costPerPerson = d.totalCost / d.participants.length;
+                d.participants.forEach(email => {
+                    const userName = payments.find(p => p.email === email)?.name || email;
+                    if (!debtSummary[email]) debtSummary[email] = { name: userName, owed: 0, paid: 0 };
+                    debtSummary[email].owed += costPerPerson;
+                });
+            }
+        });
+
+        payments.forEach(p => {
+            if (!debtSummary[p.email]) debtSummary[p.email] = { name: p.name, owed: 0, paid: 0 };
+            if (p.status === 'confirmed') {
+                debtSummary[p.email].paid += p.amount;
+            }
+        });
+
+        const debtRows = Object.entries(debtSummary).map(([email, data]) => {
+            const balance = data.owed - data.paid;
+            return `
+                <tr>
+                    <td>${data.name}</td>
+                    <td>$${data.owed.toFixed(2)}</td>
+                    <td>$${data.paid.toFixed(2)}</td>
+                    <td style="font-weight: bold; color: ${balance > 0 ? 'var(--warning)' : 'var(--success)'}">${balance > 0 ? 'Owes $' : 'Paid $'}${Math.abs(balance).toFixed(2)}</td>
+                </tr>
+            `;
+        }).join('');
+
+        debtBody.innerHTML = debtRows || '<tr><td colspan="4" style="text-align: center; color: #999;">No data yet</td></tr>';
+    }
+
+    function renderInventory(inventory) {
+        const tbody = document.getElementById('inventoryBody');
+
+        if (inventory.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #999;">No inventory items</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = inventory.map(item => `
+            <tr>
+                <td>${item.name}</td>
+                <td>${item.category}</td>
+                <td>${item.quantity}</td>
+                <td>${item.unit}</td>
+                <td>${item.lastUpdated ? new Date(item.lastUpdated.toDate()).toLocaleDateString() : '-'}</td>
+            </tr>
+        `).join('');
+    }
+
+    function updateDashboard() {
+        // Calculate what user owes
+        let amountOwed = 0;
+        dinners.forEach(d => {
+            if (d.participants.includes(currentUser.email)) {
+                amountOwed += (d.totalCost / d.participants.length);
+            }
+        });
+
+        // Calculate what user paid
+        let amountPaid = 0;
+        payments.forEach(p => {
+            if (p.email === currentUser.email && p.status === 'confirmed') {
+                amountPaid += p.amount;
+            }
+        });
+
+        document.getElementById('amountOwed').textContent = '$' + amountOwed.toFixed(2);
+        document.getElementById('amountPaid').textContent = '$' + amountPaid.toFixed(2);
+    }
+
+    function showMessage(message, type) {
+        const messageEl = document.getElementById('message');
+        messageEl.textContent = message;
+        messageEl.className = 'message show ' + type;
+        setTimeout(() => {
+            messageEl.classList.remove('show');
+        }, 3000);
+    }
+
+    // Set default date inputs
+    document.getElementById('dinnerDateTime') && (document.getElementById('dinnerDateTime').valueAsDate = new Date());
+    document.getElementById('receiptDate') && (document.getElementById('receiptDate').valueAsDate = new Date());
+</script>
+
+</body>
+</html>
