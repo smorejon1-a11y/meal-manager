@@ -19,6 +19,7 @@
             --light: #f5f5f5;
             --success: #2e7d32;
             --warning: #f57c00;
+            --critical: #c62828;
         }
 
         body {
@@ -47,7 +48,6 @@
 
         .logo {
             font-size: 2rem;
-            font-weight: bold;
         }
 
         .station-name {
@@ -88,11 +88,6 @@
             background-color: var(--primary-dark);
         }
 
-        button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
-
         button.secondary {
             background-color: var(--gold);
             color: var(--dark);
@@ -105,22 +100,6 @@
         button.small {
             padding: 0.5rem 1rem;
             font-size: 0.9rem;
-        }
-
-        button.success {
-            background-color: var(--success);
-        }
-
-        button.success:hover {
-            background-color: #1b5e20;
-        }
-
-        button.danger {
-            background-color: #c62828;
-        }
-
-        button.danger:hover {
-            background-color: #ad1457;
         }
 
         /* NAVIGATION */
@@ -176,12 +155,6 @@
             color: var(--primary);
         }
 
-        .login-box p {
-            text-align: center;
-            color: #666;
-            margin-bottom: 2rem;
-        }
-
         .form-group {
             margin-bottom: 1.5rem;
         }
@@ -190,16 +163,12 @@
             display: block;
             margin-bottom: 0.5rem;
             font-weight: 600;
-            color: var(--dark);
         }
 
         input[type="email"],
         input[type="password"],
         input[type="text"],
         input[type="number"],
-        input[type="date"],
-        input[type="time"],
-        input[type="file"],
         select {
             width: 100%;
             padding: 0.8rem;
@@ -227,115 +196,11 @@
             display: none;
         }
 
-        /* DASHBOARD GRID */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+        .page {
+            display: block;
         }
 
-        .card {
-            background: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-left: 5px solid var(--primary);
-        }
-
-        .card h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-
-        .card p {
-            color: #666;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-value {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin: 1rem 0;
-        }
-
-        .card-success {
-            border-left-color: var(--success);
-        }
-
-        .card-success h2 {
-            color: var(--success);
-        }
-
-        .card-success .card-value {
-            color: var(--success);
-        }
-
-        .card-warning {
-            border-left-color: var(--warning);
-        }
-
-        .card-warning h2 {
-            color: var(--warning);
-        }
-
-        .card-warning .card-value {
-            color: var(--warning);
-        }
-
-        /* DINNERS */
-        .dinners-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .dinner-card {
-            background: white;
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-top: 4px solid var(--primary);
-        }
-
-        .dinner-date {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .dinner-cook {
-            color: #666;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .dinner-cost {
-            background-color: var(--light);
-            padding: 1rem;
-            border-radius: 4px;
-            margin: 1rem 0;
-        }
-
-        .dinner-cost-line {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .dinner-cost-line:last-child {
-            margin-bottom: 0;
-            font-weight: bold;
-            color: var(--primary);
-            border-top: 1px solid #ddd;
-            padding-top: 0.5rem;
-        }
-
-        /* TABLES */
+        /* TABLE */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -361,32 +226,32 @@
             background-color: var(--light);
         }
 
-        .status-badge {
-            display: inline-block;
+        /* STATUS COLORS */
+        .status-critical {
+            background-color: #ffcdd2;
+            color: var(--critical);
+            font-weight: bold;
             padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
+            border-radius: 4px;
+            display: inline-block;
         }
 
-        .status-paid {
-            background-color: #c8e6c9;
-            color: var(--success);
-        }
-
-        .status-unpaid {
-            background-color: #ffccbc;
+        .status-low {
+            background-color: #ffe0b2;
             color: var(--warning);
+            font-weight: bold;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            display: inline-block;
         }
 
-        .status-pending {
-            background-color: #b3e5fc;
-            color: #01579b;
-        }
-
-        .status-approved {
+        .status-good {
             background-color: #c8e6c9;
             color: var(--success);
+            font-weight: bold;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            display: inline-block;
         }
 
         /* MODAL */
@@ -412,7 +277,7 @@
             padding: 2rem;
             border-radius: 8px;
             width: 100%;
-            max-width: 600px;
+            max-width: 500px;
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 10px 40px rgba(0,0,0,0.3);
@@ -438,117 +303,13 @@
             padding: 0;
             width: 30px;
             height: 30px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
         .close-btn:hover {
             color: var(--primary);
         }
 
-        /* IMAGE PREVIEW */
-        .image-preview {
-            width: 100%;
-            max-width: 300px;
-            margin: 1rem 0;
-            border-radius: 4px;
-            display: none;
-        }
-
-        .image-preview.show {
-            display: block;
-        }
-
-        /* LOADING */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* PENDING INVENTORY ITEMS */
-        .pending-item {
-            background-color: #fff3e0;
-            border-left: 4px solid var(--warning);
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-        }
-
-        .pending-item h4 {
-            margin-bottom: 0.5rem;
-            color: var(--dark);
-        }
-
-        .pending-item p {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-        }
-
-        .item-details {
-            background: white;
-            padding: 0.5rem;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .item-details span {
-            display: inline-block;
-            margin-right: 1rem;
-        }
-
-        .pending-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            nav {
-                flex-direction: column;
-            }
-
-            nav button {
-                width: 100%;
-                text-align: left;
-            }
-
-            .container {
-                padding: 1rem;
-            }
-
-            .dashboard-grid,
-            .dinners-container {
-                grid-template-columns: 1fr;
-            }
-
-            table {
-                font-size: 0.9rem;
-            }
-
-            th, td {
-                padding: 0.7rem;
-            }
-        }
-
+        /* MESSAGE */
         .message {
             padding: 1rem;
             border-radius: 4px;
@@ -572,10 +333,65 @@
             border-left: 4px solid #c62828;
         }
 
-        .message.info {
-            background-color: #e3f2fd;
-            color: #01579b;
-            border-left: 4px solid #01579b;
+        /* CARD */
+        .card {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .card h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .request-card {
+            background: white;
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .request-card h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .request-card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            nav button {
+                width: 100%;
+                text-align: left;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            table {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 0.7rem;
+            }
         }
     </style>
 </head>
@@ -584,9 +400,9 @@
 <!-- LOGIN PAGE -->
 <div id="loginPage" class="login-container">
     <div class="login-box">
-        <div class="logo" style="text-align: center; font-size: 3rem; margin-bottom: 1rem;">🚒</div>
+        <div style="text-align: center; font-size: 3rem; margin-bottom: 1rem;">🚒</div>
         <h1>Station 2 Kitty</h1>
-        <p>Meal Management System</p>
+        <p style="text-align: center; color: #666; margin-bottom: 2rem;">Meal Management System</p>
         
         <div class="form-group">
             <label>Email</label>
@@ -629,9 +445,7 @@
     <header>
         <div class="header-left">
             <div class="logo">🚒</div>
-            <div>
-                <div class="station-name">Station 2 Kitty</div>
-            </div>
+            <div class="station-name">Station 2 Kitty</div>
         </div>
         <div class="header-right">
             <div class="user-info">
@@ -644,202 +458,97 @@
 
     <!-- NAVIGATION -->
     <nav>
-        <button class="nav-btn active" onclick="showPage('dashboard', this)">Dashboard</button>
-        <button class="nav-btn" onclick="showPage('dinners', this)">Dinners</button>
-        <button class="nav-btn" onclick="showPage('kitchen', this)">Kitchen Items</button>
-        <button class="nav-btn" onclick="showPage('payments', this)">Payments</button>
-        <button class="nav-btn" onclick="showPage('inventory', this)">Inventory</button>
-        <button class="nav-btn admin-only hidden" onclick="showPage('admin', this)">Admin Panel</button>
+        <button class="nav-btn active" onclick="showPage('inventory', this)">📦 Inventory</button>
+        <button class="nav-btn" onclick="showPage('dinners', this)">🍽️ Dinners</button>
+        <button class="nav-btn" onclick="showPage('requests', this)">🛒 Food Requests</button>
+        <button class="nav-btn admin-only hidden" onclick="showPage('admin', this)">⚙️ Admin</button>
     </nav>
 
     <!-- CONTENT -->
     <div class="container">
         <div id="message" class="message"></div>
 
-        <!-- DASHBOARD -->
-        <div id="dashboardPage" class="page">
-            <h1 style="margin-bottom: 2rem; color: var(--primary);">Dashboard</h1>
+        <!-- INVENTORY PAGE -->
+        <div id="inventoryPage" class="page">
+            <h1 style="margin-bottom: 1rem; color: var(--primary);">Pantry & Fridge Inventory</h1>
             
-            <div class="dashboard-grid">
-                <div class="card card-warning">
-                    <h2>You Owe</h2>
-                    <div class="card-value" id="amountOwed">$0.00</div>
-                    <p>Total from dinners</p>
-                </div>
+            <button class="secondary admin-only hidden" onclick="openAddItemModal()" style="margin-bottom: 2rem;">+ Add Item</button>
 
-                <div class="card card-success">
-                    <h2>You've Paid</h2>
-                    <div class="card-value" id="amountPaid">$0.00</div>
-                    <p>Total payments</p>
-                </div>
-
-                <div class="card">
-                    <h2>Kitchen Balance</h2>
-                    <div class="card-value" id="kitchenBalance">$1,000.00</div>
-                    <p>Available for meals</p>
-                </div>
+            <div style="margin-bottom: 1rem; padding: 1rem; background-color: var(--light); border-radius: 8px; border-left: 4px solid var(--primary);">
+                <p style="margin-bottom: 0.5rem;"><strong>📊 Status Legend:</strong></p>
+                <p style="font-size: 0.9rem; margin-bottom: 0.3rem;"><span class="status-critical">NEED NOW</span> - Critical (0-1 items)</p>
+                <p style="font-size: 0.9rem; margin-bottom: 0.3rem;"><span class="status-low">LOW STOCK</span> - Medium/Low (at 50% of max)</p>
+                <p style="font-size: 0.9rem;"><span class="status-good">GOOD</span> - Well Stocked (50%+ of max)</p>
             </div>
 
-            <h2 style="margin-bottom: 1rem; color: var(--primary);">Upcoming Dinners</h2>
-            <div id="upcomingDinners" class="dinners-container">
-                <p style="grid-column: 1/-1; text-align: center; color: #999;">No upcoming dinners</p>
-            </div>
-        </div>
-
-        <!-- DINNERS -->
-        <div id="dinnersPage" class="page hidden">
-            <h1 style="margin-bottom: 1rem; color: var(--primary);">Dinners</h1>
-            
-            <button class="secondary admin-only hidden" onclick="openCreateDinnerModal()" style="margin-bottom: 2rem;">+ Create Dinner</button>
-
-            <div id="dinnersList" class="dinners-container">
-                <p style="grid-column: 1/-1; text-align: center; color: #999;">No dinners available</p>
-            </div>
-        </div>
-
-        <!-- KITCHEN ITEMS -->
-        <div id="kitchenPage" class="page hidden">
-            <h1 style="margin-bottom: 1rem; color: var(--primary);">Kitchen Items & Receipts</h1>
-            
-            <button onclick="openKitchenReceiptModal()" style="margin-bottom: 2rem;">+ Submit Receipt</button>
-
-            <h2 style="margin-bottom: 1rem;">Recent Receipts</h2>
-            <table id="kitchenReceiptsTable">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Vendor</th>
-                        <th>Category</th>
-                        <th>Amount</th>
-                        <th>Description</th>
-                        <th>Submitted By</th>
-                    </tr>
-                </thead>
-                <tbody id="kitchenReceiptsBody">
-                    <tr><td colspan="6" style="text-align: center; color: #999;">No receipts yet</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- PAYMENTS -->
-        <div id="paymentsPage" class="page hidden">
-            <h1 style="margin-bottom: 1rem; color: var(--primary);">Payments</h1>
-
-            <div style="background-color: var(--light); padding: 2rem; border-radius: 8px; margin-bottom: 2rem; text-align: center;">
-                <h2>Send Payment via Venmo</h2>
-                <div style="font-size: 4rem; margin: 1rem 0;">📱</div>
-                <p>Scan QR or send payment to:</p>
-                <p style="margin-top: 0.5rem; font-weight: bold; font-size: 1.2rem;">@Station2Kitty</p>
-                <button onclick="openPaymentModal()" style="margin-top: 1rem;">Mark Payment Sent</button>
-            </div>
-
-            <h2 style="margin-bottom: 1rem;">Payment Status</h2>
-            <table id="paymentsTable">
-                <thead>
-                    <tr>
-                        <th>Person</th>
-                        <th>Amount</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="paymentsBody">
-                    <tr><td colspan="4" style="text-align: center; color: #999;">No payments yet</td></tr>
-                </tbody>
-            </table>
-
-            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">Who Owes What</h2>
-            <table id="debtTable">
-                <thead>
-                    <tr>
-                        <th>Person</th>
-                        <th>Total Owed</th>
-                        <th>Total Paid</th>
-                        <th>Balance</th>
-                    </tr>
-                </thead>
-                <tbody id="debtBody">
-                    <tr><td colspan="4" style="text-align: center; color: #999;">No data yet</td></tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- INVENTORY -->
-        <div id="inventoryPage" class="page hidden">
-            <h1 style="margin-bottom: 1rem; color: var(--primary);">Inventory</h1>
-            
             <table id="inventoryTable">
                 <thead>
                     <tr>
                         <th>Item</th>
                         <th>Category</th>
-                        <th>Quantity</th>
-                        <th>Unit</th>
-                        <th>Last Updated</th>
+                        <th>On Hand</th>
+                        <th>Max</th>
+                        <th>Status</th>
+                        <th class="admin-only hidden">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="inventoryBody">
-                    <tr><td colspan="5" style="text-align: center; color: #999;">No inventory items</td></tr>
+                    <tr><td colspan="6" style="text-align: center; color: #999;">No items yet - add some to get started!</td></tr>
                 </tbody>
             </table>
         </div>
 
-        <!-- ADMIN PANEL -->
+        <!-- DINNERS PAGE -->
+        <div id="dinnersPage" class="page hidden">
+            <h1 style="margin-bottom: 1rem; color: var(--primary);">Dinners</h1>
+
+            <button class="secondary admin-only hidden" onclick="openCreateDinnerModal()" style="margin-bottom: 2rem;">+ Create Dinner</button>
+
+            <div id="dinnersList" style="display: grid; gap: 1.5rem;">
+                <p style="color: #999;">No dinners scheduled</p>
+            </div>
+        </div>
+
+        <!-- FOOD REQUESTS PAGE -->
+        <div id="requestsPage" class="page hidden">
+            <h1 style="margin-bottom: 1rem; color: var(--primary);">Food Requests</h1>
+
+            <div class="card">
+                <h2>Request Food Item</h2>
+                <div class="form-group">
+                    <label>What food do you want?</label>
+                    <input type="text" id="requestFood" placeholder="e.g., Chicken breast, sweet potatoes, coffee">
+                </div>
+                <div class="form-group">
+                    <label>Why? (optional)</label>
+                    <input type="text" id="requestReason" placeholder="e.g., for meal prep, running low, crew favorite">
+                </div>
+                <button onclick="submitFoodRequest()" style="width: 100%;">Submit Request</button>
+            </div>
+
+            <h2 style="margin-bottom: 1rem; color: var(--primary);">Pending Requests</h2>
+            <div id="requestsList">
+                <p style="color: #999;">No pending requests</p>
+            </div>
+        </div>
+
+        <!-- ADMIN PAGE -->
         <div id="adminPage" class="page hidden admin-only">
-            <h1 style="margin-bottom: 2rem; color: var(--primary);">Admin Panel</h1>
+            <h1 style="margin-bottom: 1rem; color: var(--primary);">Admin Panel</h1>
 
-            <div class="dashboard-grid">
-                <div class="card">
-                    <h2>Total Collected</h2>
-                    <div class="card-value" id="adminTotalCollected">$0.00</div>
-                    <button onclick="openEditBalanceModal()" class="small" style="margin-top: 1rem;">Edit</button>
+            <div class="card">
+                <h2>Weekly Inventory Check</h2>
+                <p style="margin-bottom: 1rem; color: #666;">Update quantities for each item based on current stock:</p>
+                <div id="adminInventoryForm">
+                    <!-- Will be populated by JavaScript -->
                 </div>
-
-                <div class="card">
-                    <h2>Total Spent</h2>
-                    <div class="card-value" id="adminTotalSpent">$0.00</div>
-                </div>
-
-                <div class="card">
-                    <h2>Remaining</h2>
-                    <div class="card-value" id="adminRemaining">$0.00</div>
-                </div>
+                <button onclick="saveInventoryCheck()" style="width: 100%; margin-top: 1rem;">Save Inventory Check</button>
             </div>
 
-            <h2 style="margin-top: 2rem; margin-bottom: 1.5rem;">Pending Inventory Items</h2>
-            <div id="pendingInventoryList">
-                <p style="color: #999;">No pending inventory items</p>
+            <div class="card">
+                <h2>Manage Items</h2>
+                <button onclick="openAddItemModal()" class="secondary">+ Add New Item</button>
             </div>
-
-            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">Kitchen Receipts</h2>
-            <table id="adminReceiptsTable">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Vendor</th>
-                        <th>Amount</th>
-                        <th>Submitted By</th>
-                    </tr>
-                </thead>
-                <tbody id="adminReceiptsBody">
-                    <tr><td colspan="4" style="text-align: center; color: #999;">No receipts</td></tr>
-                </tbody>
-            </table>
-
-            <h2 style="margin-top: 2rem; margin-bottom: 1rem;">Pending Payment Confirmations</h2>
-            <table id="adminPaymentsTable">
-                <thead>
-                    <tr>
-                        <th>Person</th>
-                        <th>Amount</th>
-                        <th>Date Submitted</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="adminPaymentsBody">
-                    <tr><td colspan="4" style="text-align: center; color: #999;">No pending payments</td></tr>
-                </tbody>
-            </table>
         </div>
     </div>
 </div>
@@ -853,129 +562,74 @@
             <h2>Create Dinner</h2>
             <button class="close-btn" onclick="closeModal('createDinnerModal')">×</button>
         </div>
+
         <div class="form-group">
             <label>Date</label>
             <input type="date" id="dinnerDate">
         </div>
+
         <div class="form-group">
             <label>Time</label>
             <input type="time" id="dinnerTime">
         </div>
+
         <div class="form-group">
             <label>Who's Cooking?</label>
             <input type="text" id="dinnerCook" placeholder="Name">
         </div>
+
+        <div class="form-group">
+            <label>What's for dinner?</label>
+            <input type="text" id="dinnerDescription" placeholder="e.g., Spaghetti with sauce">
+        </div>
+
         <div class="form-group">
             <label>Total Cost ($)</label>
             <input type="number" id="dinnerCost" step="0.01" placeholder="0.00">
         </div>
-        <div class="form-group">
-            <label>Description</label>
-            <input type="text" id="dinnerDescription" placeholder="e.g., Spaghetti with sauce">
-        </div>
+
         <button onclick="createDinner()" style="width: 100%;">Create Dinner</button>
     </div>
 </div>
 
-<!-- KITCHEN RECEIPT MODAL -->
-<div id="kitchenReceiptModal" class="modal">
+<!-- MODALS -->
+<div id="addItemModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h2>Submit Kitchen Receipt</h2>
-            <button class="close-btn" onclick="closeModal('kitchenReceiptModal')">×</button>
-        </div>
-
-        <div id="apiKeyPrompt" class="hidden" style="background-color: #e3f2fd; border-left: 4px solid #01579b; padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem;">
-            <p style="margin-bottom: 0.5rem;"><strong>ℹ️ Claude API Key Needed</strong></p>
-            <p style="font-size: 0.9rem; margin-bottom: 1rem;">To read receipts with AI, enter your Claude API key (it's only used in your browser, never saved):</p>
-            <input type="password" id="claudeApiKey" placeholder="sk-ant-..." style="margin-bottom: 0.5rem;">
-            <p style="font-size: 0.8rem; color: #666;">Get your key at: <a href="https://console.anthropic.com/account/keys" target="_blank" style="color: #01579b;">console.anthropic.com/account/keys</a></p>
-            <button onclick="saveApiKey()" class="small" style="margin-top: 0.5rem;">Save Key</button>
+            <h2>Add Inventory Item</h2>
+            <button class="close-btn" onclick="closeModal('addItemModal')">×</button>
         </div>
 
         <div class="form-group">
-            <label>Upload Receipt Photo</label>
-            <input type="file" id="receiptImage" accept="image/*" onchange="handleReceiptImage()">
-            <p style="font-size: 0.9rem; color: #666; margin-top: 0.5rem;">AI will read the receipt and auto-fill items</p>
+            <label>Item Name</label>
+            <input type="text" id="itemName" placeholder="e.g., Chicken breast">
         </div>
 
-        <img id="receiptPreview" class="image-preview">
-
-        <div id="receiptLoading" class="hidden" style="text-align: center; padding: 1rem;">
-            <div class="loading"></div>
-            <p style="margin-top: 0.5rem;">Reading receipt...</p>
-        </div>
-
-        <div class="form-group">
-            <label>Date</label>
-            <input type="date" id="receiptDate">
-        </div>
-        <div class="form-group">
-            <label>Vendor</label>
-            <input type="text" id="receiptVendor" placeholder="e.g., Publix">
-        </div>
-        <div class="form-group">
-            <label>Total Amount ($)</label>
-            <input type="number" id="receiptAmount" step="0.01" placeholder="0.00">
-        </div>
         <div class="form-group">
             <label>Category</label>
-            <select id="receiptCategory">
+            <select id="itemCategory">
                 <option value="proteins">Proteins</option>
                 <option value="vegetables">Vegetables</option>
-                <option value="grains">Grains/Pasta</option>
-                <option value="spices">Spices</option>
+                <option value="grains">Grains</option>
+                <option value="dairy">Dairy</option>
+                <option value="condiments">Condiments</option>
                 <option value="beverages">Beverages</option>
-                <option value="supplies">Supplies</option>
+                <option value="snacks">Snacks</option>
                 <option value="other">Other</option>
             </select>
         </div>
+
         <div class="form-group">
-            <label>Description</label>
-            <input type="text" id="receiptDescription" placeholder="What did you buy?">
+            <label>Current Quantity</label>
+            <input type="number" id="itemQuantity" placeholder="0">
         </div>
 
-        <div id="extractedItems" class="hidden" style="background-color: #f5f5f5; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
-            <p style="font-weight: bold; margin-bottom: 0.5rem;">📦 Items Found:</p>
-            <div id="itemsList"></div>
-            <label style="margin-top: 1rem; display: block;">
-                <input type="checkbox" id="addToInventory" checked>
-                <span>Add these items to inventory when submitted</span>
-            </label>
-        </div>
-
-        <button onclick="submitKitchenReceipt()" style="width: 100%;">Submit Receipt</button>
-    </div>
-</div>
-
-<!-- PAYMENT MODAL -->
-<div id="paymentModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>Mark Payment Sent</h2>
-            <button class="close-btn" onclick="closeModal('paymentModal')">×</button>
-        </div>
-        <p style="margin-bottom: 1rem; color: #666;">I've sent payment via Venmo to @Station2Kitty</p>
         <div class="form-group">
-            <label>Amount Sent ($)</label>
-            <input type="number" id="paymentAmount" step="0.01" placeholder="0.00">
+            <label>Max Quantity (recommended)</label>
+            <input type="number" id="itemMaxQuantity" placeholder="10">
         </div>
-        <button onclick="submitPayment()" style="width: 100%;">Confirm Payment Sent</button>
-    </div>
-</div>
 
-<!-- EDIT BALANCE MODAL (ADMIN ONLY) -->
-<div id="editBalanceModal" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2>Edit Kitchen Balance</h2>
-            <button class="close-btn" onclick="closeModal('editBalanceModal')">×</button>
-        </div>
-        <div class="form-group">
-            <label>Total Money Collected ($)</label>
-            <input type="number" id="newBalance" step="0.01" placeholder="0.00">
-        </div>
-        <button onclick="updateBalance()" style="width: 100%;">Update Balance</button>
+        <button onclick="addItem()" style="width: 100%;">Add Item</button>
     </div>
 </div>
 
@@ -991,8 +645,7 @@
         projectId: "station-2-kitty",
         storageBucket: "station-2-kitty.firebasestorage.app",
         messagingSenderId: "554327060532",
-        appId: "1:554327060532:web:80711fe3aefa71dce4da61",
-        measurementId: "G-RKM5B7Z15E"
+        appId: "1:554327060532:web:80711fe3aefa71dce4da61"
     };
 
     const app = initializeApp(firebaseConfig);
@@ -1003,14 +656,9 @@
     let currentUser = null;
     let userRole = 'crew';
     let userName = '';
-    let kitchenBalance = 0;
+    let inventoryItems = [];
+    let foodRequests = [];
     let dinners = [];
-    let payments = [];
-    let receipts = [];
-    let inventory = [];
-    let pendingInventory = [];
-    let claudeApiKey = localStorage.getItem('claudeApiKey') || '';
-    let extractedItems = [];
 
     // AUTH FUNCTIONS
     window.handleLogin = async function() {
@@ -1023,8 +671,7 @@
         }
 
         try {
-            const result = await signInWithEmailAndPassword(auth, email, password);
-            currentUser = result.user;
+            await signInWithEmailAndPassword(auth, email, password);
         } catch (error) {
             showMessage('Login failed: ' + error.message, 'error');
         }
@@ -1046,7 +693,6 @@
 
         try {
             const result = await createUserWithEmailAndPassword(auth, email, password);
-            currentUser = result.user;
             
             await addDoc(collection(db, 'users'), {
                 uid: result.user.uid,
@@ -1056,10 +702,7 @@
                 createdAt: serverTimestamp()
             });
 
-            showMessage('Account created! Logging in...', 'success');
-            setTimeout(() => {
-                document.getElementById('signupForm').classList.add('hidden');
-            }, 1000);
+            showMessage('Account created!', 'success');
         } catch (error) {
             showMessage('Signup failed: ' + error.message, 'error');
         }
@@ -1067,11 +710,8 @@
 
     window.handleLogout = async function() {
         await signOut(auth);
-        currentUser = null;
         document.getElementById('loginPage').style.display = 'flex';
         document.getElementById('mainApp').classList.add('hidden');
-        document.getElementById('loginEmail').value = '';
-        document.getElementById('loginPassword').value = '';
     };
 
     // CHECK AUTH STATE
@@ -1100,12 +740,9 @@
                 }
             }
 
-            loadDinners();
-            loadReceipts();
-            loadPayments();
-            loadKitchenBalance();
             loadInventory();
-            loadPendingInventory();
+            loadFoodRequests();
+            loadDinners();
         } else {
             document.getElementById('loginPage').style.display = 'flex';
             document.getElementById('mainApp').classList.add('hidden');
@@ -1119,6 +756,10 @@
 
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
         if (btn) btn.classList.add('active');
+
+        if (pageName === 'admin') {
+            populateAdminForm();
+        }
     };
 
     // MODAL FUNCTIONS
@@ -1126,183 +767,74 @@
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('dinnerDate').value = today;
         document.getElementById('dinnerTime').value = '18:00';
+        document.getElementById('dinnerCook').value = '';
+        document.getElementById('dinnerDescription').value = '';
+        document.getElementById('dinnerCost').value = '';
         document.getElementById('createDinnerModal').classList.add('active');
     };
 
-    window.openKitchenReceiptModal = function() {
-        resetReceiptModal();
-        document.getElementById('kitchenReceiptModal').classList.add('active');
-        
-        if (claudeApiKey) {
-            document.getElementById('apiKeyPrompt').classList.add('hidden');
-        } else {
-            document.getElementById('apiKeyPrompt').classList.remove('hidden');
-        }
-    };
-
-    window.openPaymentModal = function() {
-        document.getElementById('paymentModal').classList.add('active');
-    };
-
-    window.openEditBalanceModal = function() {
-        document.getElementById('newBalance').value = kitchenBalance;
-        document.getElementById('editBalanceModal').classList.add('active');
+    window.openAddItemModal = function() {
+        document.getElementById('itemName').value = '';
+        document.getElementById('itemQuantity').value = '';
+        document.getElementById('itemMaxQuantity').value = '';
+        document.getElementById('addItemModal').classList.add('active');
     };
 
     window.closeModal = function(modalId) {
         document.getElementById(modalId).classList.remove('active');
     };
 
-    // API KEY MANAGEMENT
-    window.saveApiKey = function() {
-        const key = document.getElementById('claudeApiKey').value;
-        if (!key) {
-            showMessage('Please enter your API key', 'error');
+    // INVENTORY FUNCTIONS
+    window.addItem = async function() {
+        const name = document.getElementById('itemName').value;
+        const category = document.getElementById('itemCategory').value;
+        const quantity = parseInt(document.getElementById('itemQuantity').value) || 0;
+        const maxQuantity = parseInt(document.getElementById('itemMaxQuantity').value) || 10;
+
+        if (!name) {
+            showMessage('Please enter item name', 'error');
             return;
         }
-        claudeApiKey = key;
-        localStorage.setItem('claudeApiKey', key);
-        document.getElementById('apiKeyPrompt').classList.add('hidden');
-        showMessage('API key saved!', 'success');
-    };
 
-    // RECEIPT IMAGE HANDLING
-    window.handleReceiptImage = async function() {
-        const fileInput = document.getElementById('receiptImage');
-        const file = fileInput.files[0];
+        try {
+            await addDoc(collection(db, 'inventory'), {
+                name: name,
+                category: category,
+                quantity: quantity,
+                maxQuantity: maxQuantity,
+                createdAt: serverTimestamp(),
+                createdBy: userName
+            });
 
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('receiptPreview').src = e.target.result;
-            document.getElementById('receiptPreview').classList.add('show');
-        };
-        reader.readAsDataURL(file);
-
-        // Read receipt with Claude
-        if (claudeApiKey) {
-            await readReceiptWithClaude(file);
+            showMessage('Item added!', 'success');
+            closeModal('addItemModal');
+            loadInventory();
+        } catch (error) {
+            showMessage('Error: ' + error.message, 'error');
         }
     };
 
-    window.readReceiptWithClaude = async function(file) {
-        const reader = new FileReader();
-        
-        return new Promise((resolve) => {
-            reader.onload = async function(e) {
-                const base64Image = e.target.result.split(',')[1];
-                
-                document.getElementById('receiptLoading').classList.remove('hidden');
-                document.getElementById('extractedItems').classList.add('hidden');
-
-                try {
-                    const response = await fetch('https://api.anthropic.com/v1/messages', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'x-api-key': claudeApiKey,
-                            'anthropic-version': '2023-06-01'
-                        },
-                        body: JSON.stringify({
-                            model: 'claude-opus-4-6',
-                            max_tokens: 1024,
-                            messages: [{
-                                role: 'user',
-                                content: [
-                                    {
-                                        type: 'image',
-                                        source: {
-                                            type: 'base64',
-                                            media_type: 'image/jpeg',
-                                            data: base64Image
-                                        }
-                                    },
-                                    {
-                                        type: 'text',
-                                        text: `Read this receipt and extract all items purchased. For each item, provide: item name, quantity, unit (if applicable). 
-                                        
-Format your response EXACTLY as JSON:
-{
-  "items": [
-    {"name": "Item Name", "quantity": 5, "unit": "lbs", "category": "proteins"},
-    {"name": "Item Name", "quantity": 1, "unit": "bottle", "category": "beverages"}
-  ]
-}
-
-Categories: proteins, vegetables, grains, spices, beverages, supplies, other
-
-Only respond with valid JSON, no other text.`
-                                    }
-                                ]
-                            }]
-                        })
-                    });
-
-                    const data = await response.json();
-                    
-                    if (data.error) {
-                        showMessage('Error reading receipt: ' + data.error.message, 'error');
-                        document.getElementById('receiptLoading').classList.add('hidden');
-                        resolve();
-                        return;
-                    }
-
-                    const responseText = data.content[0].text;
-                    
-                    // Parse JSON response
-                    try {
-                        const jsonMatch = responseText.match(/\{[\s\S]*\}/);
-                        if (!jsonMatch) throw new Error('No JSON found');
-                        
-                        const parsed = JSON.parse(jsonMatch[0]);
-                        extractedItems = parsed.items || [];
-
-                        if (extractedItems.length > 0) {
-                            displayExtractedItems();
-                        } else {
-                            showMessage('No items found in receipt', 'info');
-                        }
-                    } catch (e) {
-                        showMessage('Could not parse receipt. Please enter items manually.', 'info');
-                        console.log('Parse error:', e);
-                    }
-
-                    document.getElementById('receiptLoading').classList.add('hidden');
-                } catch (error) {
-                    showMessage('Error reading receipt: ' + error.message, 'error');
-                    document.getElementById('receiptLoading').classList.add('hidden');
-                }
-                
-                resolve();
-            };
-            reader.readAsDataURL(file);
-        });
+    window.updateItemQuantity = async function(itemId, newQuantity) {
+        try {
+            await updateDoc(doc(db, 'inventory', itemId), {
+                quantity: parseInt(newQuantity),
+                lastUpdated: serverTimestamp()
+            });
+        } catch (error) {
+            showMessage('Error updating: ' + error.message, 'error');
+        }
     };
 
-    window.displayExtractedItems = function() {
-        const itemsList = document.getElementById('itemsList');
-        itemsList.innerHTML = extractedItems.map((item, idx) => `
-            <div style="background: white; padding: 0.5rem; margin-bottom: 0.5rem; border-radius: 4px; font-size: 0.9rem;">
-                <strong>${item.name}</strong> - ${item.quantity} ${item.unit || 'units'} (${item.category})
-            </div>
-        `).join('');
-        document.getElementById('extractedItems').classList.remove('hidden');
-    };
-
-    window.resetReceiptModal = function() {
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('receiptDate').value = today;
-        document.getElementById('receiptImage').value = '';
-        document.getElementById('receiptPreview').classList.remove('show');
-        document.getElementById('receiptLoading').classList.add('hidden');
-        document.getElementById('extractedItems').classList.add('hidden');
-        document.getElementById('receiptVendor').value = '';
-        document.getElementById('receiptAmount').value = '';
-        document.getElementById('receiptCategory').value = 'proteins';
-        document.getElementById('receiptDescription').value = '';
-        document.getElementById('addToInventory').checked = true;
-        extractedItems = [];
+    window.deleteItem = async function(itemId) {
+        if (confirm('Delete this item?')) {
+            try {
+                await deleteDoc(doc(db, 'inventory', itemId));
+                loadInventory();
+                showMessage('Item deleted', 'success');
+            } catch (error) {
+                showMessage('Error: ' + error.message, 'error');
+            }
+        }
     };
 
     // DINNER FUNCTIONS
@@ -1311,6 +843,7 @@ Only respond with valid JSON, no other text.`
         const time = document.getElementById('dinnerTime').value;
         const cook = document.getElementById('dinnerCook').value;
         const cost = document.getElementById('dinnerCost').value;
+        const description = document.getElementById('dinnerDescription').value;
 
         if (!date || !time || !cook || !cost) {
             showMessage('Please fill in all fields', 'error');
@@ -1324,7 +857,7 @@ Only respond with valid JSON, no other text.`
                 dateTime: dateTime,
                 cook: cook,
                 totalCost: parseFloat(cost),
-                description: document.getElementById('dinnerDescription').value,
+                description: description,
                 participants: [],
                 createdBy: currentUser.email,
                 createdAt: serverTimestamp()
@@ -1334,32 +867,28 @@ Only respond with valid JSON, no other text.`
             closeModal('createDinnerModal');
             loadDinners();
         } catch (error) {
-            showMessage('Error creating dinner: ' + error.message, 'error');
+            showMessage('Error: ' + error.message, 'error');
         }
     };
 
     window.optIntoDinner = async function(dinnerId) {
         try {
             const dinner = dinners.find(d => d.id === dinnerId);
+            if (dinner.participants.includes(currentUser.email)) {
+                showMessage('You already RSVPed!', 'error');
+                return;
+            }
+
             const newParticipants = [...dinner.participants, currentUser.email];
             
             await updateDoc(doc(db, 'dinners', dinnerId), {
                 participants: newParticipants
             });
 
-            // Update local state immediately
-            const updatedDinner = dinners.find(d => d.id === dinnerId);
-            if (updatedDinner) {
-                updatedDinner.participants = newParticipants;
-            }
-            
-            // Force render and dashboard update
-            renderDinners();
-            updateDashboard();
-            
             loadDinners();
+            showMessage('RSVP confirmed!', 'success');
         } catch (error) {
-            showMessage('Error opting in: ' + error.message, 'error');
+            showMessage('Error: ' + error.message, 'error');
         }
     };
 
@@ -1372,201 +901,55 @@ Only respond with valid JSON, no other text.`
                 participants: newParticipants
             });
 
-            // Update local state immediately
-            const updatedDinner = dinners.find(d => d.id === dinnerId);
-            if (updatedDinner) {
-                updatedDinner.participants = newParticipants;
-            }
-            
-            // Force render and dashboard update
-            renderDinners();
-            updateDashboard();
-            
             loadDinners();
+            showMessage('Cancelled RSVP', 'success');
         } catch (error) {
-            showMessage('Error opting out: ' + error.message, 'error');
+            showMessage('Error: ' + error.message, 'error');
         }
     };
 
-    // KITCHEN RECEIPT FUNCTIONS
-    window.submitKitchenReceipt = async function() {
-        const date = document.getElementById('receiptDate').value;
-        const amount = document.getElementById('receiptAmount').value;
+    // FOOD REQUEST FUNCTIONS
+    window.submitFoodRequest = async function() {
+        const food = document.getElementById('requestFood').value;
+        const reason = document.getElementById('requestReason').value;
 
-        if (!date || !amount) {
-            showMessage('Please fill in date and amount', 'error');
+        if (!food) {
+            showMessage('Please enter a food item', 'error');
             return;
         }
 
         try {
-            const receiptData = {
-                date: new Date(date),
-                vendor: document.getElementById('receiptVendor').value || 'Unknown',
-                amount: parseFloat(amount),
-                category: document.getElementById('receiptCategory').value,
-                description: document.getElementById('receiptDescription').value,
-                submittedBy: userName,
-                submittedByEmail: currentUser.email,
-                createdAt: serverTimestamp()
-            };
-
-            const receiptRef = await addDoc(collection(db, 'receipts'), receiptData);
-
-            // Add items to pending inventory if checked and items extracted
-            if (document.getElementById('addToInventory').checked && extractedItems.length > 0) {
-                for (const item of extractedItems) {
-                    await addDoc(collection(db, 'pending_inventory'), {
-                        name: item.name,
-                        quantity: item.quantity,
-                        unit: item.unit || 'units',
-                        category: item.category || 'other',
-                        receiptId: receiptRef.id,
-                        submittedBy: userName,
-                        status: 'pending',
-                        createdAt: serverTimestamp()
-                    });
-                }
-                showMessage('Receipt submitted! Items pending admin approval.', 'success');
-            } else {
-                showMessage('Receipt submitted!', 'success');
-            }
-
-            resetReceiptModal();
-            closeModal('kitchenReceiptModal');
-            loadReceipts();
-            loadPendingInventory();
-            loadKitchenBalance();
-        } catch (error) {
-            showMessage('Error submitting receipt: ' + error.message, 'error');
-        }
-    };
-
-    // PENDING INVENTORY FUNCTIONS
-    window.approvePendingItem = async function(itemId) {
-        try {
-            const item = pendingInventory.find(i => i.id === itemId);
-            
-            // Add to inventory
-            await addDoc(collection(db, 'inventory'), {
-                name: item.name,
-                quantity: item.quantity,
-                unit: item.unit,
-                category: item.category,
-                lastUpdated: serverTimestamp()
-            });
-
-            // Mark as approved
-            await updateDoc(doc(db, 'pending_inventory', itemId), {
-                status: 'approved',
-                approvedAt: serverTimestamp()
-            });
-
-            loadPendingInventory();
-            loadInventory();
-            showMessage('Item approved and added to inventory!', 'success');
-        } catch (error) {
-            showMessage('Error approving item: ' + error.message, 'error');
-        }
-    };
-
-    window.rejectPendingItem = async function(itemId) {
-        try {
-            await updateDoc(doc(db, 'pending_inventory', itemId), {
-                status: 'rejected',
-                rejectedAt: serverTimestamp()
-            });
-
-            loadPendingInventory();
-            showMessage('Item rejected.', 'success');
-        } catch (error) {
-            showMessage('Error rejecting item: ' + error.message, 'error');
-        }
-    };
-
-    // PAYMENT FUNCTIONS
-    window.submitPayment = async function() {
-        const amount = parseFloat(document.getElementById('paymentAmount').value);
-        
-        if (!amount) {
-            showMessage('Please enter an amount', 'error');
-            return;
-        }
-
-        try {
-            await addDoc(collection(db, 'payments'), {
-                email: currentUser.email,
-                name: userName,
-                amount: amount,
-                submittedAt: serverTimestamp(),
+            await addDoc(collection(db, 'food_requests'), {
+                food: food,
+                reason: reason,
+                requestedBy: userName,
                 status: 'pending',
-                confirmedAt: null,
-                confirmedBy: null
+                createdAt: serverTimestamp()
             });
 
-            showMessage('Payment submitted for confirmation!', 'success');
-            closeModal('paymentModal');
-            loadPayments();
+            showMessage('Request submitted!', 'success');
+            document.getElementById('requestFood').value = '';
+            document.getElementById('requestReason').value = '';
+            loadFoodRequests();
         } catch (error) {
-            showMessage('Error submitting payment: ' + error.message, 'error');
+            showMessage('Error: ' + error.message, 'error');
         }
     };
 
-    window.confirmPayment = async function(paymentId) {
-        if (userRole !== 'admin') {
-            showMessage('Only admins can confirm payments', 'error');
-            return;
-        }
-
+    window.markRequestFulfilled = async function(requestId) {
         try {
-            await updateDoc(doc(db, 'payments', paymentId), {
-                status: 'confirmed',
-                confirmedAt: serverTimestamp(),
-                confirmedBy: userName
+            await updateDoc(doc(db, 'food_requests', requestId), {
+                status: 'fulfilled',
+                fulfilledAt: serverTimestamp()
             });
-
-            loadPayments();
-            showMessage('Payment confirmed!', 'success');
+            loadFoodRequests();
+            showMessage('Request marked fulfilled', 'success');
         } catch (error) {
-            showMessage('Error confirming payment: ' + error.message, 'error');
+            showMessage('Error: ' + error.message, 'error');
         }
     };
 
-    // BALANCE FUNCTIONS
-    window.updateBalance = async function() {
-        const newBalance = parseFloat(document.getElementById('newBalance').value);
-        
-        if (isNaN(newBalance)) {
-            showMessage('Please enter a valid amount', 'error');
-            return;
-        }
-
-        try {
-            const settingsRef = collection(db, 'settings');
-            const q = query(settingsRef, where('type', '==', 'kitchen'));
-            const snapshot = await getDocs(q);
-
-            if (!snapshot.empty) {
-                await updateDoc(doc(db, 'settings', snapshot.docs[0].id), {
-                    startingBalance: newBalance,
-                    updatedAt: serverTimestamp()
-                });
-            } else {
-                await addDoc(collection(db, 'settings'), {
-                    type: 'kitchen',
-                    startingBalance: newBalance,
-                    createdAt: serverTimestamp()
-                });
-            }
-
-            showMessage('Balance updated!', 'success');
-            closeModal('editBalanceModal');
-            loadKitchenBalance();
-        } catch (error) {
-            showMessage('Error updating balance: ' + error.message, 'error');
-        }
-    };
-
-    // DATA LOADING FUNCTIONS
+    // DATA LOADING
     async function loadDinners() {
         const q = query(collection(db, 'dinners'));
         onSnapshot(q, (snapshot) => {
@@ -1575,289 +958,194 @@ Only respond with valid JSON, no other text.`
                 dinners.push({ id: doc.id, ...doc.data() });
             });
             renderDinners();
-            updateDashboard();
-        });
-    }
-
-    async function loadReceipts() {
-        const q = query(collection(db, 'receipts'));
-        onSnapshot(q, (snapshot) => {
-            receipts = [];
-            snapshot.forEach((doc) => {
-                receipts.push({ id: doc.id, ...doc.data() });
-            });
-            renderReceipts();
-        });
-    }
-
-    async function loadPayments() {
-        const q = query(collection(db, 'payments'));
-        onSnapshot(q, (snapshot) => {
-            payments = [];
-            snapshot.forEach((doc) => {
-                payments.push({ id: doc.id, ...doc.data() });
-            });
-            renderPayments();
-            updateDashboard();
-        });
-    }
-
-    async function loadKitchenBalance() {
-        const q = query(collection(db, 'settings'), where('type', '==', 'kitchen'));
-        onSnapshot(q, (snapshot) => {
-            if (!snapshot.empty) {
-                const data = snapshot.docs[0].data();
-                kitchenBalance = data.startingBalance || 0;
-            } else {
-                kitchenBalance = 1000;
-            }
-
-            const totalSpent = receipts.reduce((sum, r) => sum + r.amount, 0);
-            const remaining = kitchenBalance - totalSpent;
-
-            document.getElementById('kitchenBalance').textContent = '$' + remaining.toFixed(2);
-            document.getElementById('adminTotalCollected').textContent = '$' + kitchenBalance.toFixed(2);
-            document.getElementById('adminTotalSpent').textContent = '$' + totalSpent.toFixed(2);
-            document.getElementById('adminRemaining').textContent = '$' + remaining.toFixed(2);
         });
     }
 
     async function loadInventory() {
         const q = query(collection(db, 'inventory'));
         onSnapshot(q, (snapshot) => {
-            inventory = [];
+            inventoryItems = [];
             snapshot.forEach((doc) => {
-                inventory.push({ id: doc.id, ...doc.data() });
+                inventoryItems.push({ id: doc.id, ...doc.data() });
             });
             renderInventory();
         });
     }
 
-    async function loadPendingInventory() {
-        const q = query(collection(db, 'pending_inventory'), where('status', '==', 'pending'));
+    async function loadFoodRequests() {
+        const q = query(collection(db, 'food_requests'), where('status', '==', 'pending'));
         onSnapshot(q, (snapshot) => {
-            pendingInventory = [];
+            foodRequests = [];
             snapshot.forEach((doc) => {
-                pendingInventory.push({ id: doc.id, ...doc.data() });
+                foodRequests.push({ id: doc.id, ...doc.data() });
             });
-            renderPendingInventory();
+            renderFoodRequests();
         });
     }
 
     // RENDER FUNCTIONS
     function renderDinners() {
-        const upcomingContainer = document.getElementById('upcomingDinners');
-        const dinnerListContainer = document.getElementById('dinnersList');
+        const container = document.getElementById('dinnersList');
+
+        if (dinners.length === 0) {
+            container.innerHTML = '<p style="color: #999;">No dinners scheduled</p>';
+            return;
+        }
+
         const upcoming = dinners.filter(d => new Date(d.dateTime.toDate()) > new Date()).sort((a, b) => a.dateTime - b.dateTime);
-
+        
         if (upcoming.length === 0) {
-            upcomingContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">No upcoming dinners</p>';
-            dinnerListContainer.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">No dinners available</p>';
+            container.innerHTML = '<p style="color: #999;">No upcoming dinners</p>';
             return;
         }
 
-        upcomingContainer.innerHTML = upcoming.map(dinner => createDinnerCard(dinner)).join('');
-        dinnerListContainer.innerHTML = dinners.map(dinner => createDinnerCard(dinner)).join('');
-    }
+        container.innerHTML = upcoming.map(dinner => {
+            const date = new Date(dinner.dateTime.toDate());
+            const costPerPerson = dinner.participants.length > 0 ? (dinner.totalCost / dinner.participants.length).toFixed(2) : dinner.totalCost;
+            const isParticipant = dinner.participants.includes(currentUser.email);
 
-    function createDinnerCard(dinner) {
-        const date = new Date(dinner.dateTime.toDate());
-        const costPerPerson = dinner.participants.length > 0 ? (dinner.totalCost / dinner.participants.length).toFixed(2) : dinner.totalCost;
-        const isParticipant = dinner.participants.includes(currentUser.email);
-
-        return `
-            <div class="dinner-card">
-                <div class="dinner-date">${date.toLocaleDateString()} at ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-                <div class="dinner-cook">👨‍🍳 ${dinner.cook}</div>
-                <div class="dinner-cost">
-                    <div class="dinner-cost-line">
-                        <span>Total Cost:</span>
-                        <span>$${dinner.totalCost.toFixed(2)}</span>
-                    </div>
-                    <div class="dinner-cost-line">
-                        <span>Participants:</span>
-                        <span>${dinner.participants.length} people</span>
-                    </div>
-                    <div class="dinner-cost-line">
-                        <span>Per Person:</span>
-                        <span>$${costPerPerson}</span>
-                    </div>
-                </div>
-                ${dinner.description ? `<p style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;"><strong>Menu:</strong> ${dinner.description}</p>` : ''}
-                ${isParticipant 
-                    ? `<button onclick="optOutDinner('${dinner.id}')" class="small" style="margin-top: 1rem;">Cancel RSVP</button>` 
-                    : `<button onclick="optIntoDinner('${dinner.id}')" class="small success" style="margin-top: 1rem;">RSVP</button>`
-                }
-            </div>
-        `;
-    }
-
-    function renderReceipts() {
-        const tbody = document.getElementById('kitchenReceiptsBody');
-        const adminBody = document.getElementById('adminReceiptsBody');
-
-        if (receipts.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">No receipts yet</td></tr>';
-            adminBody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">No receipts</td></tr>';
-            return;
-        }
-
-        const receiptRows = receipts.sort((a, b) => new Date(b.date.toDate()) - new Date(a.date.toDate())).map(r => `
-            <tr>
-                <td>${new Date(r.date.toDate()).toLocaleDateString()}</td>
-                <td>${r.vendor}</td>
-                <td>${r.category}</td>
-                <td>$${r.amount.toFixed(2)}</td>
-                <td>${r.description}</td>
-                <td>${r.submittedBy}</td>
-            </tr>
-        `).join('');
-
-        tbody.innerHTML = receiptRows;
-
-        // Admin receipts table - separate rendering
-        const adminReceiptRows = receipts.sort((a, b) => new Date(b.date.toDate()) - new Date(a.date.toDate())).map(r => `
-            <tr>
-                <td>${new Date(r.date.toDate()).toLocaleDateString()}</td>
-                <td>${r.vendor}</td>
-                <td>$${r.amount.toFixed(2)}</td>
-                <td>${r.submittedBy}</td>
-            </tr>
-        `).join('');
-
-        adminBody.innerHTML = adminReceiptRows;
-    }
-
-    function renderPayments() {
-        const tbody = document.getElementById('paymentsBody');
-        const adminBody = document.getElementById('adminPaymentsBody');
-        const debtBody = document.getElementById('debtBody');
-
-        if (payments.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">No payments yet</td></tr>';
-            adminBody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">No pending payments</td></tr>';
-            debtBody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: #999;">No data yet</td></tr>';
-            return;
-        }
-
-        const paymentRows = payments.sort((a, b) => new Date(b.submittedAt.toDate()) - new Date(a.submittedAt.toDate())).map(p => `
-            <tr>
-                <td>${p.name}</td>
-                <td>$${p.amount.toFixed(2)}</td>
-                <td>${new Date(p.submittedAt.toDate()).toLocaleDateString()}</td>
-                <td><span class="status-badge status-${p.status === 'confirmed' ? 'paid' : 'pending'}">${p.status.toUpperCase()}</span></td>
-            </tr>
-        `).join('');
-
-        tbody.innerHTML = paymentRows;
-
-        const pending = payments.filter(p => p.status === 'pending').map(p => `
-            <tr>
-                <td>${p.name}</td>
-                <td>$${p.amount.toFixed(2)}</td>
-                <td>${new Date(p.submittedAt.toDate()).toLocaleDateString()}</td>
-                <td><button class="small success" onclick="confirmPayment('${p.id}')">Confirm</button></td>
-            </tr>
-        `).join('');
-
-        adminBody.innerHTML = pending || '<tr><td colspan="4" style="text-align: center; color: #999;">No pending payments</td></tr>';
-
-        // Debt summary
-        const debtSummary = {};
-        dinners.forEach(d => {
-            if (d.participants.length > 0) {
-                const costPerPerson = d.totalCost / d.participants.length;
-                d.participants.forEach(email => {
-                    const user = payments.find(p => p.email === email) || { name: 'Unknown' };
-                    if (!debtSummary[email]) debtSummary[email] = { name: user.name, owed: 0, paid: 0 };
-                    debtSummary[email].owed += costPerPerson;
-                });
-            }
-        });
-
-        payments.forEach(p => {
-            if (!debtSummary[p.email]) debtSummary[p.email] = { name: p.name, owed: 0, paid: 0 };
-            if (p.status === 'confirmed') {
-                debtSummary[p.email].paid += p.amount;
-            }
-        });
-
-        const debtRows = Object.entries(debtSummary).map(([email, data]) => {
-            const balance = data.owed - data.paid;
             return `
-                <tr>
-                    <td>${data.name}</td>
-                    <td>$${data.owed.toFixed(2)}</td>
-                    <td>$${data.paid.toFixed(2)}</td>
-                    <td style="font-weight: bold; color: ${balance > 0 ? 'var(--warning)' : 'var(--success)'}">${balance > 0 ? 'Owes $' : 'Paid $'}${Math.abs(balance).toFixed(2)}</td>
-                </tr>
+                <div style="background: white; border-radius: 8px; padding: 1.5rem; border-top: 4px solid var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                    <div style="font-size: 1.2rem; font-weight: bold; color: var(--primary); margin-bottom: 0.5rem;">
+                        📅 ${date.toLocaleDateString()} at ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                    </div>
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 1rem;">👨‍🍳 ${dinner.cook}</p>
+                    
+                    ${dinner.description ? `<p style="margin-bottom: 1rem;"><strong>Menu:</strong> ${dinner.description}</p>` : ''}
+
+                    <div style="background-color: #f5f5f5; padding: 1rem; border-radius: 4px; margin-bottom: 1rem;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Total Cost:</span>
+                            <strong>$${dinner.totalCost.toFixed(2)}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span>Participants:</span>
+                            <strong>${dinner.participants.length} people</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; border-top: 1px solid #ddd; padding-top: 0.5rem;">
+                            <span>Per Person:</span>
+                            <strong style="color: var(--primary);">$${costPerPerson}</strong>
+                        </div>
+                    </div>
+
+                    ${isParticipant 
+                        ? `<button class="small" onclick="optOutDinner('${dinner.id}')" style="background-color: #c62828;">Cancel RSVP</button>` 
+                        : `<button class="small" onclick="optIntoDinner('${dinner.id}')" style="background-color: var(--success);">✓ RSVP</button>`
+                    }
+                </div>
             `;
         }).join('');
-
-        debtBody.innerHTML = debtRows || '<tr><td colspan="4" style="text-align: center; color: #999;">No data yet</td></tr>';
     }
 
     function renderInventory() {
         const tbody = document.getElementById('inventoryBody');
 
-        if (inventory.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="5" style="text-align: center; color: #999;">No inventory items</td></tr>';
+        if (inventoryItems.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">No items yet</td></tr>';
             return;
         }
 
-        tbody.innerHTML = inventory.sort((a, b) => b.lastUpdated - a.lastUpdated).map(item => `
-            <tr>
-                <td>${item.name}</td>
-                <td>${item.category}</td>
-                <td>${item.quantity}</td>
-                <td>${item.unit}</td>
-                <td>${item.lastUpdated ? new Date(item.lastUpdated.toDate()).toLocaleDateString() : '-'}</td>
-            </tr>
+        const sorted = inventoryItems.sort((a, b) => a.name.localeCompare(b.name));
+
+        tbody.innerHTML = sorted.map(item => {
+            const status = getStatus(item.quantity, item.maxQuantity);
+            const statusBadge = status === 'critical' ? '<span class="status-critical">NEED NOW</span>' :
+                                status === 'low' ? '<span class="status-low">LOW STOCK</span>' :
+                                '<span class="status-good">GOOD</span>';
+
+            return `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>${item.category}</td>
+                    <td>
+                        ${userRole === 'admin' 
+                            ? `<input type="number" value="${item.quantity}" style="width: 60px; padding: 0.3rem;" onchange="updateItemQuantity('${item.id}', this.value)">` 
+                            : item.quantity}
+                    </td>
+                    <td>${item.maxQuantity}</td>
+                    <td>${statusBadge}</td>
+                    <td class="admin-only hidden">
+                        <button class="small" onclick="deleteItem('${item.id}')" style="background-color: #c62828;">Delete</button>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    function getStatus(quantity, maxQuantity) {
+        const percentage = (quantity / maxQuantity) * 100;
+        if (quantity === 0 || quantity < 1) return 'critical';
+        if (percentage <= 50) return 'low';
+        return 'good';
+    }
+
+    function renderFoodRequests() {
+        const container = document.getElementById('requestsList');
+
+        if (foodRequests.length === 0) {
+            container.innerHTML = '<p style="color: #999;">No pending requests</p>';
+            return;
+        }
+
+        container.innerHTML = foodRequests.map(req => `
+            <div class="request-card">
+                <h3>🍽️ ${req.food}</h3>
+                <p><strong>Requested by:</strong> ${req.requestedBy}</p>
+                ${req.reason ? `<p><strong>Reason:</strong> ${req.reason}</p>` : ''}
+                <p><strong>Date:</strong> ${new Date(req.createdAt.toDate()).toLocaleDateString()}</p>
+                ${userRole === 'admin' ? `
+                    <button class="small" onclick="markRequestFulfilled('${req.id}')" style="background-color: var(--success); margin-top: 0.5rem;">✓ Fulfilled</button>
+                ` : ''}
+            </div>
         `).join('');
     }
 
-    function renderPendingInventory() {
-        const container = document.getElementById('pendingInventoryList');
-
-        if (pendingInventory.length === 0) {
-            container.innerHTML = '<p style="color: #999;">No pending inventory items</p>';
+    function populateAdminForm() {
+        const form = document.getElementById('adminInventoryForm');
+        if (inventoryItems.length === 0) {
+            form.innerHTML = '<p style="color: #999;">No items to update</p>';
             return;
         }
 
-        container.innerHTML = pendingInventory.map(item => `
-            <div class="pending-item">
-                <h4>📦 ${item.name}</h4>
-                <div class="item-details">
-                    <span><strong>Qty:</strong> ${item.quantity} ${item.unit}</span>
-                    <span><strong>Category:</strong> ${item.category}</span>
-                    <span><strong>Submitted by:</strong> ${item.submittedBy}</span>
-                </div>
-                <div class="pending-actions">
-                    <button class="small success" onclick="approvePendingItem('${item.id}')">✓ Approve</button>
-                    <button class="small danger" onclick="rejectPendingItem('${item.id}')">✗ Reject</button>
+        form.innerHTML = inventoryItems.sort((a, b) => a.name.localeCompare(b.name)).map(item => `
+            <div style="margin-bottom: 1rem; padding: 1rem; background: var(--light); border-radius: 4px;">
+                <label style="font-weight: bold; margin-bottom: 0.5rem; display: block;">${item.name}</label>
+                <div style="display: flex; gap: 0.5rem; align-items: center;">
+                    <input type="number" value="${item.quantity}" id="qty-${item.id}" style="width: 80px; padding: 0.5rem;">
+                    <span>/ ${item.maxQuantity}</span>
                 </div>
             </div>
         `).join('');
     }
 
-    function updateDashboard() {
-        let amountOwed = 0;
-        dinners.forEach(d => {
-            if (d.participants.includes(currentUser.email)) {
-                amountOwed += (d.totalCost / d.participants.length);
+    window.saveInventoryCheck = async function() {
+        const updates = [];
+        inventoryItems.forEach(item => {
+            const input = document.getElementById(`qty-${item.id}`);
+            if (input) {
+                const newQty = parseInt(input.value) || 0;
+                if (newQty !== item.quantity) {
+                    updates.push(updateDoc(doc(db, 'inventory', item.id), {
+                        quantity: newQty,
+                        lastUpdated: serverTimestamp()
+                    }));
+                }
             }
         });
 
-        let amountPaid = 0;
-        payments.forEach(p => {
-            if (p.email === currentUser.email && p.status === 'confirmed') {
-                amountPaid += p.amount;
-            }
-        });
+        if (updates.length === 0) {
+            showMessage('No changes to save', 'error');
+            return;
+        }
 
-        document.getElementById('amountOwed').textContent = '$' + amountOwed.toFixed(2);
-        document.getElementById('amountPaid').textContent = '$' + amountPaid.toFixed(2);
-    }
+        try {
+            await Promise.all(updates);
+            showMessage(`Updated ${updates.length} items!`, 'success');
+            loadInventory();
+        } catch (error) {
+            showMessage('Error: ' + error.message, 'error');
+        }
+    };
 
     function showMessage(message, type) {
         const messageEl = document.getElementById('message');
@@ -1865,15 +1153,8 @@ Only respond with valid JSON, no other text.`
         messageEl.className = 'message show ' + type;
         setTimeout(() => {
             messageEl.classList.remove('show');
-        }, 4000);
+        }, 3000);
     }
-
-    // Initialize date inputs
-    window.addEventListener('load', function() {
-        const today = new Date().toISOString().split('T')[0];
-        if (document.getElementById('dinnerDate')) document.getElementById('dinnerDate').value = today;
-        if (document.getElementById('receiptDate')) document.getElementById('receiptDate').value = today;
-    });
 </script>
 
 </body>
